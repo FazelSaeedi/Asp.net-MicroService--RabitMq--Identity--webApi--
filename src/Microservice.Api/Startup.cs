@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using src.Microservice.Api.Handlers;
 using src.Microservice.Common.Events;
 using src.Microservice.Common.RabbitMq;
 
@@ -28,7 +29,8 @@ namespace Microservice.Api
         {
 
             services.AddControllers();
-            // services.AddScoped<IEventHandler<ActivityCreated> , ActivityCreatedHandler >();
+            services.AddScoped<IEventHandler<ActivityCreated> , ActivityCreateHandler>();
+            
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice.Api", Version = "v1" });
