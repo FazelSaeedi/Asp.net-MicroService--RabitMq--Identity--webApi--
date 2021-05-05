@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using RawRabbit;
 using src.Microservice.Common.Events;
+using src.Microservice.Common.RabbitMq;
 
 namespace src.Microservice.Common.Services
 {
