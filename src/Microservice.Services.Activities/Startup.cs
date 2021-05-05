@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microservice.Common.Commands;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -11,6 +12,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using src.Microservice.Common.RabbitMq;
+using src.Microservice.Services.Activities.Handler;
 
 namespace Microservice.Services.Activities
 {
@@ -27,7 +30,11 @@ namespace Microservice.Services.Activities
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddControllers();
+            // services.AddControllers();
+            services.AddMvc();
+            services.AddRabbitMq(Configuration);
+            services.AddScoped<ICommandHandler<CreateActivity> , CreateActivityHandler>();
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Microservice.Services.Activities", Version = "v1" });
