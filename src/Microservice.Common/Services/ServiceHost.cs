@@ -32,8 +32,13 @@ namespace src.Microservice.Common.Services
             .Build();
 
             var webHostBuilder = WebHost.CreateDefaultBuilder(args)
+             .UseUrls("http://*:5050")
             .UseConfiguration(config)
-            .UseStartup<TSturtup>();
+            .UseStartup<TSturtup>()
+            .UseDefaultServiceProvider(option =>
+            {
+                option.ValidateScopes = false;
+            }); ;
 
             return new HostBuilder(webHostBuilder.Build());
         }

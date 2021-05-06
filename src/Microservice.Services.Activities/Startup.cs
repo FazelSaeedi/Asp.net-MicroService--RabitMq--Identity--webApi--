@@ -51,15 +51,15 @@ namespace Microservice.Services.Activities
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Microservice.Services.Activities v1"));
             }
 
-            app.UseHttpsRedirection();
+          
 
+            app.UseStaticFiles();
             app.UseRouting();
-
-            app.UseAuthorization();
+            app.UseCors();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+                endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}");
             });
         }
     }
