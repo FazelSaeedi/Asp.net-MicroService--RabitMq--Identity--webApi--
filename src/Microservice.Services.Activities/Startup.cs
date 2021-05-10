@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microservice.Common.Commands;
 using Microservice.Common.Mongo;
+using Microservice.Services.Activities.Domain.Repositoies;
+using Microservice.Services.Activities.Repositories;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -36,6 +38,8 @@ namespace Microservice.Services.Activities
             services.AddMongoDB(Configuration);
             services.AddRabbitMq(Configuration);
             services.AddScoped<ICommandHandler<CreateActivity> , CreateActivityHandler>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
+            services.AddScoped<IActivityRepository, ActivityRepository>();
 
             services.AddSwaggerGen(c =>
             {
